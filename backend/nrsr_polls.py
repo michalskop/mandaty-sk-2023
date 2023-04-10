@@ -459,22 +459,22 @@ names = pd.DataFrame([{'names': allvaluesperc.columns}])
 names.to_json(app_path + "nrsr/nrsr_polls_parties_candidates.json", orient='records')
 
 # coalitions
-source1 = source[source['tags'] == 'coalitions']
-allvaluesp = source1.iloc[:, (cn + 1):]
-allvaluesp = allvaluesp.dropna(axis=1, how='all')
-# change % to values %
-allvaluesperc = allvaluesp.apply(lambda x: x.str.rstrip('%').astype('float'), axis=0)
+# source1 = source[source['tags'] == 'coalitions']
+# allvaluesp = source1.iloc[:, (cn + 1):]
+# allvaluesp = allvaluesp.dropna(axis=1, how='all')
+# # change % to values %
+# allvaluesperc = allvaluesp.apply(lambda x: x.str.rstrip('%').astype('float'), axis=0)
 
-allvaluesperc = allvaluesperc.sort_values(by = [allvaluesperc.index[-1], allvaluesperc.index[-2]], axis = 1, ascending = False)
+# allvaluesperc = allvaluesperc.sort_values(by = [allvaluesperc.index[-1], allvaluesperc.index[-2]], axis = 1, ascending = False)
 
-t = source1.loc[:, ['poll:identifier', 'pollster:id', 'middle_date']].join(allvaluesperc, how='right')
+# t = source1.loc[:, ['poll:identifier', 'pollster:id', 'middle_date']].join(allvaluesperc, how='right')
 
-t = t.sort_values(['middle_date'], ascending=[False])
+# t = t.sort_values(['middle_date'], ascending=[False])
 
-t.to_json(app_path + "nrsr/nrsr_polls_coalitions_table.json", orient='records')
+# t.to_json(app_path + "nrsr/nrsr_polls_coalitions_table.json", orient='records')
 
-names = pd.DataFrame([{'names': allvaluesperc.columns}])
-names.to_json(app_path + "nrsr/nrsr_polls_coalitions_candidates.json", orient='records')
+# names = pd.DataFrame([{'names': allvaluesperc.columns}])
+# names.to_json(app_path + "nrsr/nrsr_polls_coalitions_candidates.json", orient='records')
 
 # RACE CHART
 origin = pd.read_csv(data_path + "origin_race_chart.csv")
