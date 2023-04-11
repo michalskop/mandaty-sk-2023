@@ -1,6 +1,6 @@
 {
   "node_modules/nuxt/dist/app/entry.mjs": {
-    "file": "entry-3dad7f31.mjs",
+    "file": "entry-b0e68221.mjs",
     "src": "node_modules/nuxt/dist/app/entry.mjs",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -15,12 +15,12 @@
       "entry.b6527ae6.css"
     ],
     "assets": [
-      "nrsr_thumbnail.cfe11ac8.svg",
-      "nrsr_polls_history_small.72127b4f.svg"
+      "nrsr_thumbnail.99b00771.svg",
+      "nrsr_polls_history_small.9190d90e.svg"
     ]
   },
   "pages/archiv.vue": {
-    "file": "archiv-2c1adfe9.mjs",
+    "file": "archiv-55ec96db.mjs",
     "src": "pages/archiv.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -28,7 +28,7 @@
     ]
   },
   "pages/index.vue": {
-    "file": "index-27a2120a.mjs",
+    "file": "index-3dad0f70.mjs",
     "src": "pages/index.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -39,7 +39,7 @@
     ]
   },
   "layouts/custom.vue": {
-    "file": "custom-cd8898c2.mjs",
+    "file": "custom-1ee9c069.mjs",
     "src": "layouts/custom.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -54,7 +54,7 @@
     "isDynamicEntry": true
   },
   "assets/data/nrsr/data.json": {
-    "file": "data-52a68230.mjs",
+    "file": "data-43223ee6.mjs",
     "src": "assets/data/nrsr/data.json",
     "isDynamicEntry": true
   }
