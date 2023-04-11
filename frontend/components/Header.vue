@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header class="navbar navbar-dark bg-primary">
+    <header class="navbar navbar-dark bg-primary bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand h1" href="/">Mandáty.sk<small class="d-none d-sm-inline"> váš prst na tepe doby</small></a>
         <div class="dropdown">
