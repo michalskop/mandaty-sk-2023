@@ -25,6 +25,8 @@ choices = pd.read_csv(choices_url)
 others = 'iné strany'
 
 include_limit = 0.03
+include_current3_limit = 0.02
+include_election_limit = 0.05
 
 sample_n = 777  # basic sample size
 
@@ -55,9 +57,16 @@ allvalues = allvaluesp.apply(lambda x: x.str.rstrip('%').astype('float') / 100.0
 # remove others
 allvalues = allvalues.drop(others, axis=1)
 
+# join PS and PS-SPOLU-OD into PS:
+allvalues['PS'] = allvalues.loc[:, ['PS', 'PS-SPOLU-OD']].mean(axis=1)
+del allvalues['PS-SPOLU-OD']
+
 # find max values
 maxvalues = allvalues.max(axis=0)
-selected_parties = maxvalues[maxvalues > include_limit].index
+maxvalueselection = allvalues.iloc[0, :]
+if len(allvalues) >= 3:
+  maxvalues3 = allvalues.iloc[-3:-1, :].max(axis=0)
+selected_parties = maxvalues[((maxvalues > include_limit) & (maxvalues3 > include_current3_limit)) | (maxvalueselection >= include_election_limit)].index
 selected_values = allvalues[selected_parties]
 
 # correlations
@@ -69,19 +78,36 @@ corr = corr.fillna(0)
 d = source1.loc[:, ['middle_date']].apply(lambda x: pd.to_datetime(x))
 dd = pd.DataFrame((d - d.min()).loc[:, 'middle_date'].dt.days)
 distances = pd.DataFrame(distance.cdist(dd, dd), index=d.loc[:, 'middle_date'], columns=d.loc[:, 'middle_date'])
-distances.drop_duplicates(inplace=True)
-distances.T.drop_duplicates(inplace=True)
+# distances.drop_duplicates(inplace=True)
+# distances.T.drop_duplicates(inplace=True)
 # weight matrix
 # w = pow(distances, 1/30) * 30
 w = 1 / np.exp(distances / 30)
 ws = w.sum(axis=1)
 # weighted values - mu
 # replacing missing values with 0
-mu = np.matmul(w, selected_values.fillna(0)).divide(np.asarray(ws), axis=0)
-mu.columns = selected_parties
-mun = mu * sample_n
+mu1 = np.matmul(w, selected_values.fillna(0)).divide(np.asarray(ws), axis=0)
+mu1.columns = selected_parties
+selected_values.index = mu1.index
+V_zero = selected_values.fillna(0)
+# V_zero.index = selected_values.index
+row_sums = w.dot(V_zero.notna().values.astype(int))
+row_sums.columns = V_zero.columns
+Z = np.matmul(w, V_zero)
+Z.columns = V_zero.columns
+mu = Z / row_sums
+mu.columns = selected_values.columns
+mu.index = selected_values.index
+mu = mu.where(~selected_values.isna(), np.nan)
+mu.index = selected_values.index
+
+# replace first value with election value
+mu.iloc[0, :] = selected_values.iloc[0, :]
+
+mun = mu1 * sample_n
+mun.columns = selected_parties
 # sigma
-sigman = np.sqrt(mu * (1 - mu) * sample_n)
+sigman = np.sqrt(mu1 * (1 - mu1) * sample_n)
 
 # Hagenbach-Bischoff
 def hagenbach_bischoff(sample):
@@ -163,7 +189,7 @@ middle_dates = allvalues.index.tolist()
 # lo + hi: 
 lo = binom.ppf(0.05, sample_n, mu) / sample_n
 hi = binom.ppf(0.95, sample_n, mu) / sample_n
-lo = coef * lo - mu  # lo + (lo - mu)
+lo = (coef * lo - mu).clip(lower=0)  # lo + (lo - mu)
 hi = coef * hi - mu  # hi + (hi - mu)
 
 # interactive Plotly chart data
@@ -194,7 +220,7 @@ def _html2rgba(html, a):
 # plotly
 # main chart
 fig = go.Figure()
-x = mu.index.tolist()
+x = middle_dates
 x_rev = mu.index[::-1].to_list()
 for name in mu:
   try:
@@ -222,6 +248,7 @@ for name in mu:
     x=x,
     y=mu[name],
     mode='lines',
+    connectgaps=True,
     line_shape='spline',
     name=name + ": " + str(round(mu[name][-1] * 100)) + '%',
     line=dict(
@@ -285,6 +312,7 @@ for name in mu.iloc[:, 0:5]:
       x=x,
       y=mu[name],
       mode='lines',
+      connectgaps=True,
       line_shape='spline',
       name=name + ": " + str(round(mu[name][-1] * 100)) + '%',
       line=dict(
@@ -333,6 +361,7 @@ for name in mu.iloc[:, 0:5]:
       x=x,
       y=mu[name],
       mode='lines',
+      connectgaps=True,
       line_shape='spline',
       name=name + ": " + str(round(mu[name][-1] * 100)) + '%',
       line=dict(
@@ -491,17 +520,18 @@ for l in limits[0:-1]:
   i += 1
 
 rows = pd.DataFrame()
+mu2 = mu[~mu.index.duplicated()]
 for mm in midmonths:
-  greater = mu.index[mu.index > mm]
-  smaller = mu.index[mu.index < mm]
+  greater = mu2.index[mu2.index > mm]
+  smaller = mu2.index[mu2.index < mm]
   if len(greater) == 0:
-    row = round(mu.iloc[-1, :] * 1000) / 10
+    row = round(mu2.iloc[-1, :] * 1000) / 10
   elif len(smaller) == 0:
-    row = round(mu.iloc[0, :] * 1000) / 10
+    row = round(mu2.iloc[0, :] * 1000) / 10
   else:
     d1 = mm - smaller[-1]
     d2 = greater[0] - mm
-    row = round((d2 / (d1 + d2) * mu.loc[smaller[-1].isoformat()[0:10], :] + d1 / (d1 + d2) * mu.loc[greater[0].isoformat()[0:10], :]) * 1000) / 10
+    row = round((d2 / (d1 + d2) * mu2.loc[smaller[-1].isoformat()[0:10], :] + d1 / (d1 + d2) * mu2.loc[greater[0].isoformat()[0:10], :]) * 1000) / 10
   rows = pd.concat([rows, pd.DataFrame(row).T])
 
 rows.index = [datetime.datetime.strftime(mm, "%m/%y") for mm in midmonths]
