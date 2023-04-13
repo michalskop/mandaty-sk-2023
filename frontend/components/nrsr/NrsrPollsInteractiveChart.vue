@@ -87,10 +87,17 @@ export default defineComponent({
       }
 
       // Set the layout options
+      console.log(data.election_date)
+      const day20 = new Date(data.election_date)
+      day20.setDate(day20.getDate() + 20)
+      let date20 = day20.toISOString().split('T')[0]
+      const day_20 = new Date(x[0])
+      day_20.setDate(day_20.getDate() - 20)
+      let date_20 = day_20.toISOString().split('T')[0]
       const layout = {
         xaxis: {
           tickformat: '%-d.%-m.%y',
-          range: [x[0], data.election_date]
+          range: [date_20, date20]
         },
         yaxis: { tickformat: ',.0%' },
         autosize: false,
@@ -105,7 +112,76 @@ export default defineComponent({
         },
         template: 'plotly_white',
         hovermode: 'closest',
-        rangemode: 'tozero'
+        rangemode: 'tozero',
+        // add vertical line at election date
+        shapes: [
+          {
+            type: 'line',
+            xref: 'x',
+            yref: 'paper',
+            x0: data.election_date,
+            y0: 0,
+            x1: data.election_date,
+            y1: 1,
+            line: {
+              color: 'rgba(0, 0, 0, 0.5)',
+              width: 2,
+              dash: 'dashdot'
+            }
+          },
+          {
+            type: 'line',
+            xref: 'x',
+            yref: 'paper',
+            x0: x[0],
+            y0: 0,
+            x1: x[0],
+            y1: 1,
+            line: {
+              color: 'rgba(0, 0, 0, 0.5)',
+              width: 2,
+              dash: 'dashdot'
+            }
+          }
+        ],
+        annotations: [
+          {
+            x: data.election_date,
+            y: 0.05,
+            xref: 'x',
+            yref: 'y',
+            text: 'voľby 2023',
+            showarrow: false,
+            font: {
+              family: 'Arial',
+              size: 14,
+              color: 'gray'
+            },
+            textangle: -90,
+            xanchor: 'right',
+            yanchor: 'top',
+            xschift: -10,
+            yschift: 10
+          },
+          {
+            x: x[0],
+            y: 0.05,
+            xref: 'x',
+            yref: 'y',
+            text: 'voľby 2020',
+            showarrow: false,
+            font: {
+              family: 'Arial',
+              size: 14,
+              color: 'gray'
+            },
+            textangle: -90,
+            xanchor: 'right',
+            yanchor: 'top',
+            xschift: -10,
+            yschift: 10
+          }
+        ]
       }
 
       // Set the config options
