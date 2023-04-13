@@ -256,15 +256,15 @@ for name in mu:
       color=color
     )
   ))
-  fig.add_trace(go.Scatter(
-    x=x,
-    y=allvalues[name],
-    mode='markers',
-    name=name,
-    showlegend=False,
-    marker_color=_html2rgba(color, 0.25),
-    marker_size=15
-  ))
+  # fig.add_trace(go.Scatter(
+  #   x=x,
+  #   y=allvalues[name],
+  #   mode='markers',
+  #   name=name,
+  #   showlegend=False,
+  #   marker_color=_html2rgba(color, 0.25),
+  #   marker_size=15
+  # ))
 
 # note: did not work with locale
 fig.update_xaxes(tickformat="%-d.%-m.%y")
@@ -476,7 +476,10 @@ allvaluesp = allvaluesp.dropna(axis=1, how='all')
 allvaluesperc = allvaluesp.apply(lambda x: x.str.rstrip('%').astype('float'), axis=0)
 
 # sort by last values
-allvaluesperc = allvaluesperc.sort_values(by = [allvaluesperc.index[0], allvaluesperc.index[1]], axis = 1, ascending = False)
+allvaluesperc = allvaluesperc.sort_values(by = [allvaluesperc.index[-1], allvaluesperc.index[-2]], axis = 1, ascending = False)
+# move 'others' to the end
+col_others = allvaluesperc.pop(others)
+allvaluesperc[others] = col_others
 
 t = source1.loc[:, ['poll:identifier', 'pollster:id', 'middle_date']].join(allvaluesperc, how='right')
 
