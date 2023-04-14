@@ -86,14 +86,15 @@ export default defineComponent({
         // showlegend: false
       }
 
-      // Set the layout options
-      console.log(data.election_date)
+      // Add margins to the x-axis
       const day20 = new Date(data.election_date)
       day20.setDate(day20.getDate() + 20)
       let date20 = day20.toISOString().split('T')[0]
       const day_20 = new Date(x[0])
       day_20.setDate(day_20.getDate() - 20)
       let date_20 = day_20.toISOString().split('T')[0]
+
+      // Set the layout options
       const layout = {
         xaxis: {
           tickformat: '%-d.%-m.%y',
