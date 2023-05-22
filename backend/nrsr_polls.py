@@ -465,6 +465,10 @@ valss = valss.astype({'Dátum': str})
 concats = [fulldata, valss.loc[:, fulldata.columns]]
 
 fchart = pd.concat(concats)
+
+# filter out small parties
+fchart = fchart[fchart['Strana'].isin(selected_parties)]
+
 fchart.to_csv(flourish_path + "nrsr_polls_fchart.csv", index=False)
 
 # TABLES
@@ -512,8 +516,6 @@ names.to_json(app_path + "nrsr/nrsr_polls_parties_candidates.json", orient='reco
 origin = pd.read_csv(data_path + "origin_race_chart.csv")
 
 mx = mu.index.max()
-mx.month
-mx.year
 
 limits = pd.date_range(mu.index.min() - datetime.timedelta(days=28),mu.index.max() + datetime.timedelta(days=28), freq='MS').tolist()
 midmonths = []
