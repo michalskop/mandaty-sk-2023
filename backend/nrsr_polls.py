@@ -426,13 +426,13 @@ fig.write_image(filename)
 # FLOURISH
 # 
 # First chart - current overview
-# https://public.flourish.studio/visualisation/10393920/
+# https://public.flourish.studio/visualisation/13855551/
 chartdata = pd.DataFrame(round(mu.iloc[-1] * 100).astype(int)).T
 chartdata.insert(0, 'Region name', 'SR')
 chartdata.reset_index(drop=True).to_csv(flourish_path + "nrsr_polls_current_overview.csv", index=False)
 
 # Full chart
-# https://public.flourish.studio/visualisation/10768917/
+# https://public.flourish.studio/visualisation/13854967/
 # averages
 pollsters = source1['pollster:id'].unique()
 
@@ -458,7 +458,7 @@ valss = vals.unstack().reset_index()
 valss.columns = ['Strana', 'level_1', 'Hodnota']
 valss = valss.join(pd.DataFrame(valss['level_1'].values.tolist()))
 valss.columns = ['Strana', 'level_1', 'Hodnota', 'Agentúra', 'Dátum']
-valss['size'] = (valss['Agentúra'] == 'volby') * 6 + 6
+valss['size'] = (valss['Agentúra'] == 'voľby') * 6 + 6
 valss['Priemer'] = pd.NA
 valss = valss.astype({'Dátum': str})
 
