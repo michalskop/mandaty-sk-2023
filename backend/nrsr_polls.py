@@ -471,6 +471,16 @@ fchart = fchart[fchart['Strana'].isin(selected_parties)]
 
 fchart.to_csv(flourish_path + "nrsr_polls_fchart.csv", index=False)
 
+# Filtered chart "5 %"
+# https://public.flourish.studio/visualisation/14047649/
+# averages
+# Sme rodina, SaS, KDH, SNS, Aliancia a OĽaNO od januára 2023
+parties_filter = ['SME Rodina', 'SaS', 'KDH', 'SNS', 'OĽaNO', 'Aliancia']
+agencies_filter_out = ['voľby', 'Actly']
+fchart_filtered = fchart[(fchart['Strana'].isin(parties_filter)) & (fchart['Dátum'] >= '2023-01-01') & (~fchart['Agentúra'].isin(agencies_filter_out)) ]
+# save to csv
+fchart_filtered.to_csv(flourish_path + "nrsr_polls_fchart_filtered_around_5_percent.csv", index=False)
+
 # TABLES
 # parties
 source1 = source # source[source['tags'] == 'parties']
