@@ -87,6 +87,7 @@ ws = w.sum(axis=1)
 # weighted values - mu
 # replacing missing values with 0
 mu1 = pd.DataFrame(np.matmul(np.matrix(w), np.matrix(selected_values.fillna(0)))).divide(np.asarray(ws), axis=0)
+mu1.index = w.index
 mu1.columns = selected_parties
 selected_values.index = mu1.index
 V_zero = selected_values.fillna(0)
@@ -250,7 +251,7 @@ for name in mu:
     mode='lines',
     connectgaps=True,
     line_shape='spline',
-    name=name + ": " + str(round(mu[name][-1] * 100)) + '%',
+    name=name + ": " + str(round(mu[name][len(mu) - 1] * 100)) + '%',
     line=dict(
       width=7,
       color=color
@@ -314,7 +315,7 @@ for name in mu.iloc[:, 0:5]:
       mode='lines',
       connectgaps=True,
       line_shape='spline',
-      name=name + ": " + str(round(mu[name][-1] * 100)) + '%',
+      name=name + ": " + str(round(mu[name][len(mu) - 1] * 100)) + '%',
       line=dict(
         width=5,
         color=color
@@ -363,7 +364,7 @@ for name in mu.iloc[:, 0:5]:
       mode='lines',
       connectgaps=True,
       line_shape='spline',
-      name=name + ": " + str(round(mu[name][-1] * 100)) + '%',
+      name=name + ": " + str(round(mu[name][len(mu) - 1] * 100)) + '%',
       line=dict(
         width=5,
         color=color
