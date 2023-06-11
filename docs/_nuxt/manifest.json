@@ -1,11 +1,11 @@
 {
   "node_modules/nuxt/dist/app/entry.mjs": {
-    "file": "entry-d184d2e4.mjs",
+    "file": "entry-2d078f3d.mjs",
     "src": "node_modules/nuxt/dist/app/entry.mjs",
     "isEntry": true,
     "isDynamicEntry": true,
     "dynamicImports": [
-      "_plotly-a0a6ae6e.mjs",
+      "_plotly-bcacd661.mjs",
       "assets/data/nrsr/data.json",
       "pages/archiv.vue",
       "pages/index.vue",
@@ -15,12 +15,12 @@
       "entry.b6527ae6.css"
     ],
     "assets": [
-      "nrsr_thumbnail.8003fbed.svg",
-      "nrsr_polls_history_small.dbd60e5e.svg"
+      "nrsr_thumbnail.e5bbd818.svg",
+      "nrsr_polls_history_small.b4ff25a7.svg"
     ]
   },
   "pages/archiv.vue": {
-    "file": "archiv-bf78b861.mjs",
+    "file": "archiv-eca7c7a2.mjs",
     "src": "pages/archiv.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -28,7 +28,7 @@
     ]
   },
   "pages/index.vue": {
-    "file": "index-f4307628.mjs",
+    "file": "index-65d838e4.mjs",
     "src": "pages/index.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -39,7 +39,7 @@
     ]
   },
   "layouts/custom.vue": {
-    "file": "custom-57c94782.mjs",
+    "file": "custom-9f3adf35.mjs",
     "src": "layouts/custom.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -49,8 +49,8 @@
       "custom.af0487a0.css"
     ]
   },
-  "_plotly-a0a6ae6e.mjs": {
-    "file": "plotly-a0a6ae6e.mjs",
+  "_plotly-bcacd661.mjs": {
+    "file": "plotly-bcacd661.mjs",
     "isDynamicEntry": true,
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs"
