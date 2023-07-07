@@ -15,6 +15,10 @@
 
     <hr />
 
+    <NrsrPrimeMinisterOddsChart />
+
+    <hr />
+
     <NrsrPollsPartiesTables />
 
   </div>
