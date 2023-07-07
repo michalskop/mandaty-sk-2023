@@ -1,0 +1,50 @@
+name: Update NRSR Prime Minister odds
+
+on:
+  # push:
+  #   branches:
+  #     - main
+  workflow_dispatch:
+  schedule:
+    - cron: '20 4,16 * * *'
+
+jobs:
+  update-nrsr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - uses: actions/cache@v2
+        name: Configure pip caching
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: Install Python dependencies
+        run: |
+          pip install -r backend/requirements.txt
+  
+      - name: Set git, pull
+        run: |-
+          git config user.name "Automated"
+          git config user.email "actions@users.noreply.github.com"
+          git pull
+  
+      - name: run analyses create charts
+        run: |-
+          python backend/nrsr_prime_minister_odds.py
+      - name: Commit and push if it changed
+        run: |-
+          # git config user.name "Automated"
+          # git config user.email "actions@users.noreply.github.com"
+          # git pull
+          git add -A
+          timestamp=$(date -u)
+          git commit -m "Latest data: ${timestamp}" || exit 0
+          git push
