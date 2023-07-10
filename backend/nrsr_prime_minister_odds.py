@@ -80,10 +80,22 @@ chart_data = chart_data.apply(lambda row: row / row.sum() if row.sum() > 1 else 
 
 # flourish
 flourish_data = (chart_data * 100).apply(lambda x: round(x, 1))
-df.reset_index(inplace=True)
-nice_dates = df['date'].apply(lambda x: str(datetime.datetime.fromisoformat(x).day) + ". " + str(datetime.datetime.fromisoformat(x).month) + ". " + datetime.datetime.fromisoformat(x).strftime("%y"))
-flourish_data.insert(0, 'date', nice_dates)
+flourish_data.reset_index(inplace=True)
+nice_dates = flourish_data['date'].apply(lambda x: str(datetime.datetime.fromisoformat(x).day) + ". " + str(datetime.datetime.fromisoformat(x).month) + ". " + datetime.datetime.fromisoformat(x).strftime("%y"))
+flourish_data['date'] = nice_dates
 flourish_data.to_csv(flourish_path + "nrsr_prime_minister_odds_history.csv", index=False)
+
+# flourish race
+flourish_race = flourish_data.copy()
+flourish_race = flourish_race.T
+flourish_race.columns = flourish_race.iloc[0, :]
+# remove first row
+flourish_race = flourish_race.iloc[1:, :]
+# insert photo column after 1st column
+flourish_race.insert(0, 'photo', '')
+# save
+flourish_race.to_csv(flourish_path + "nrsr_prime_minister_odds_race.csv", index=True)
+
 
 # colors:
 pm_colors = {
