@@ -128,7 +128,7 @@ for name in chart_data:
 fig.update_xaxes(tickformat="%-d.%-m.%y")
 fig.update_layout(template='plotly_white')
 fig.layout.yaxis.tickformat = ',.0%'
-fig.update_xaxes(range=[df['date'][0], election_date])
+fig.update_xaxes(range=[chart_data.index[0], election_date])
 fig.update_layout(
     autosize=False,
     width=1200,
