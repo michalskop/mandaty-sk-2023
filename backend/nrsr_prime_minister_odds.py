@@ -114,7 +114,7 @@ for name in chart_data:
   except:
     color = '#BBBBBB'
   fig.add_trace(go.Scatter(
-    x=df['date'],
+    x=chart_data.index,
     y=chart_data[name],
     mode='lines',
     name=name,
@@ -166,7 +166,7 @@ for name in chart_data.iloc[:, 0:5]:
   except:
     color = '#BBBBBB'
   fig.add_trace(go.Scatter(
-    x=df['date'],
+    x=chart_data.index,
     y=chart_data[name],
     mode='lines',
     name=name,
@@ -214,7 +214,7 @@ for name in chart_data.iloc[:, 0:5]:
   except:
     color = '#BBBBBB'
   fig.add_trace(go.Scatter(
-    x=df['date'],
+    x=chart_data.index,
     y=chart_data[name],
     mode='lines',
     name=name,
