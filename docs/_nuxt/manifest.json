@@ -1,11 +1,11 @@
 {
   "node_modules/nuxt/dist/app/entry.mjs": {
-    "file": "entry-54f68faf.mjs",
+    "file": "entry-77ef38ad.mjs",
     "src": "node_modules/nuxt/dist/app/entry.mjs",
     "isEntry": true,
     "isDynamicEntry": true,
     "dynamicImports": [
-      "_plotly-c7bb4aeb.mjs",
+      "_plotly-52a77b8e.mjs",
       "assets/data/nrsr/data.json",
       "pages/archiv.vue",
       "pages/index.vue",
@@ -17,12 +17,12 @@
     "assets": [
       "nrsr_thumbnail.df6cd140.svg",
       "nrsr_polls_history_small.aee6941d.svg",
-      "nrsr_prime_minister_odds_history.e2df2dd3.svg",
-      "nrsr_prime_minister_odds_history_small.95940505.svg"
+      "nrsr_prime_minister_odds_history.6719ccb8.svg",
+      "nrsr_prime_minister_odds_history_small.17cb17af.svg"
     ]
   },
   "pages/archiv.vue": {
-    "file": "archiv-3b4c06d9.mjs",
+    "file": "archiv-cd7d303f.mjs",
     "src": "pages/archiv.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -30,7 +30,7 @@
     ]
   },
   "pages/index.vue": {
-    "file": "index-514343be.mjs",
+    "file": "index-20be1935.mjs",
     "src": "pages/index.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -41,7 +41,7 @@
     ]
   },
   "layouts/custom.vue": {
-    "file": "custom-c35afc3a.mjs",
+    "file": "custom-f74b2c1e.mjs",
     "src": "layouts/custom.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -51,8 +51,8 @@
       "custom.af0487a0.css"
     ]
   },
-  "_plotly-c7bb4aeb.mjs": {
-    "file": "plotly-c7bb4aeb.mjs",
+  "_plotly-52a77b8e.mjs": {
+    "file": "plotly-52a77b8e.mjs",
     "isDynamicEntry": true,
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs"
