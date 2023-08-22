@@ -17,7 +17,7 @@ election_date = "2023-09-30"
 
 # limits to include in the output
 limit_current = 1
-limit_history = 10
+limit_history = 5
 
 df_fortuna = pd.read_csv(url_fortuna)
 df_tipsport = pd.read_csv(url_tipsport)
@@ -72,25 +72,32 @@ out['other_names'] = tmp.apply(lambda x: ' '.join(x[1:]))
 out.to_json(assets_path + "data/nrsr/nrsr_prime_minister_current_odds.json", orient='records')
 
 # last date
-last_date = pd.DataFrame([{'date': df.iloc[-1][0]}])
-last_date.to_json(assets_path + "data/nrsr/nrsr_prime_minister_current_odds_date.json", orient='records')
+# last_date = pd.DataFrame([{'date': df.iloc[-1][0]}])
+# last_date.to_json(assets_path + "data/nrsr/nrsr_prime_minister_current_odds_date.json", orient='records')
 
-#
 # prepare flourish + plotly charts
 df1 = 1 / df
-df1 = df1.divide(df1.sum(axis=1), axis=0).apply(lambda x: round(x, 3))
-df1 = df1.mask(df1 <= 0.005, 0)
-df1.sum(axis=0)
+df1 = df1.divide(df1.sum(axis=1), axis=0)
+df1 = df1.mask(df1 <= limit_current / 100, 0)
+df1 = df1.divide(df1.sum(axis=1), axis=0)
 
-out['name'].to_list()
+# select candidates
+# 1. current
+selected = out['name'].to_list()
+# 2. history
+selected = list(set(df1.loc[:, df1.max(axis=0) > limit_history / 100].columns.to_list() + selected))
 
-chart_data_raw = df.loc[:, out['name']]
-chart_data = 1 / chart_data_raw
+chart_data = df1.loc[:, selected]
 chart_data = chart_data.divide(chart_data.sum(axis=1), axis=0).apply(lambda x: round(x, 3))
+
+chart_data.replace(0, np.nan, inplace=True)
 
 # flourish
 flourish_data = (chart_data * 100).apply(lambda x: round(x, 1))
-flourish_data.reset_index(inplace=True)
+last_row = flourish_data.iloc[-1, :]
+sort_indexes = last_row.sort_values(ascending=False, na_position='last').index
+flourish_data = flourish_data.loc[:, sort_indexes].reset_index()
+flourish_data.replace(0, np.nan, inplace=True)
 nice_dates = flourish_data['date'].apply(lambda x: str(datetime.datetime.fromisoformat(x).day) + ". " + str(datetime.datetime.fromisoformat(x).month) + ". " + datetime.datetime.fromisoformat(x).strftime("%y"))
 flourish_data['date'] = nice_dates
 flourish_data.to_csv(flourish_path + "nrsr_prime_minister_odds_history.csv", index=False)
@@ -117,6 +124,8 @@ pm_colors = {
   'Sulík Richard': '#b4c800'
 }
 # plotly
+chart_data.replace(0, np.nan, inplace=True)
+chart_data = chart_data.loc[:, sort_indexes]
 fig = go.Figure()
 for name in chart_data:
   try:
