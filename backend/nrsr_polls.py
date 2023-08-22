@@ -181,7 +181,9 @@ with open(assets_path + "data/nrsr/current_seats.json", "w") as fout:
 
 #
 # prepare flourish + plotly charts
-mu.sort_values([mu.index.max()], ascending=False, axis=1, inplace=True)
+last_row = mu.iloc[-1, :]
+sort_indexes = last_row.sort_values(ascending=False, na_position='last').index
+mu = mu.loc[:, sort_indexes]
 mu.sort_index(inplace=True)
 allvalues.index = middle_dates
 allvalues.sort_index(inplace=True)
