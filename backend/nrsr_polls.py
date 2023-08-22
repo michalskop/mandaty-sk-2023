@@ -130,7 +130,7 @@ def hagenbach_bischoff(sample):
 
 # estimates
 # last row
-m = mun.loc[mun.index.max()] 
+m = mun.loc[mun.index.max()].iloc[-1]
 diagonal = np.diag(sigman.iloc[0]) * coef
 cov = np.matmul(np.matmul(diagonal, corr), diagonal)
 samples = pd.DataFrame(np.random.multivariate_normal(m, cov, runs) / sample_n)
@@ -222,6 +222,11 @@ def _html2rgba(html, a):
 # main chart
 fig = go.Figure()
 x = middle_dates
+# sort by last values
+last_row = mu.iloc[-1, :]
+sort_indexes = last_row.sort_values(ascending=False, na_position='last').index
+mu = mu.loc[:, sort_indexes]
+
 x_rev = mu.index[::-1].to_list()
 for name in mu:
   try:
@@ -251,7 +256,7 @@ for name in mu:
     mode='lines',
     connectgaps=True,
     line_shape='spline',
-    name=name + ": " + str(round(mu[name][len(mu) - 1] * 100)) + '%',
+    name=name + ": " + str(round(mu.fillna(0)[name][len(mu) - 1] * 100)) + '%',
     line=dict(
       width=7,
       color=color
