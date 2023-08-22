@@ -428,7 +428,8 @@ fig.write_image(filename)
 # 
 # First chart - current overview
 # https://public.flourish.studio/visualisation/13855551/
-chartdata = pd.DataFrame(round(mu.iloc[-1] * 100).fillna(0).astype(int)).T
+chartdata = pd.DataFrame(round(mu.iloc[-1] * 100).fillna(0).astype(int))
+chartdata = chartdata.sort_values(by=[chartdata.columns[0]], ascending=False).T
 chartdata.insert(0, 'Region name', 'SR')
 chartdata.reset_index(drop=True).to_csv(flourish_path + "nrsr_polls_current_overview.csv", index=False)
 
