@@ -15,6 +15,10 @@ flourish_path = "backend/data/"
 
 election_date = "2023-09-30"
 
+# limits to include in the output
+limit_current = 1
+limit_history = 10
+
 df_fortuna = pd.read_csv(url_fortuna)
 df_tipsport = pd.read_csv(url_tipsport)
 
@@ -55,7 +59,7 @@ current_data['perc'] = (current_data['p'] * 100)
 current_data['perc'] = current_data['perc'].apply(lambda x: round(x, 1))
 
 # prepare output
-out = current_data[current_data['perc'] >= 1]
+out = current_data[current_data['perc'] >= limit_current]
 out = out.sort_values(by='perc', ascending=False)
 out = out.loc[:, ['name', 'perc']]
 out['perc_floor'] = out['perc'].apply(lambda x: int(np.floor(x)))
@@ -73,10 +77,16 @@ last_date.to_json(assets_path + "data/nrsr/nrsr_prime_minister_current_odds_date
 
 #
 # prepare flourish + plotly charts
+df1 = 1 / df
+df1 = df1.divide(df1.sum(axis=1), axis=0).apply(lambda x: round(x, 3))
+df1 = df1.mask(df1 <= 0.005, 0)
+df1.sum(axis=0)
+
+out['name'].to_list()
+
 chart_data_raw = df.loc[:, out['name']]
-chart_data = (1 / chart_data_raw / current_data['p_raw'].sum()).apply(lambda x: round(x, 3))
-# hotfixing https://github.com/michalskop/mandaty-sk-2023/issues/1
-chart_data = chart_data.apply(lambda row: row / row.sum() if row.sum() > 1 else row, axis=1)
+chart_data = 1 / chart_data_raw
+chart_data = chart_data.divide(chart_data.sum(axis=1), axis=0).apply(lambda x: round(x, 3))
 
 # flourish
 flourish_data = (chart_data * 100).apply(lambda x: round(x, 1))
