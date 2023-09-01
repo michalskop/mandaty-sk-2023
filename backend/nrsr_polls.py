@@ -130,7 +130,10 @@ def hagenbach_bischoff(sample):
 
 # estimates
 # last row
-m = mun.loc[mun.index.max()].iloc[-1]
+if len(mun.loc[mun.index.max()].shape) == 1:
+  m = mun.loc[mun.index.max()]
+else: # if there are more polls on the same day
+  m = mun.loc[mun.index.max()].iloc[-1]
 diagonal = np.diag(sigman.iloc[0]) * coef
 cov = np.matmul(np.matmul(diagonal, corr), diagonal)
 samples = pd.DataFrame(np.random.multivariate_normal(m, cov, runs) / sample_n)
