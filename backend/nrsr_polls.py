@@ -1,6 +1,7 @@
 """Doing nrsr again, always better."""
 
 # from calendar import month
+import csv
 import datetime
 import json
 import math
@@ -23,6 +24,17 @@ source = pd.read_csv(source_url)
 choices = pd.read_csv(choices_url)
 
 others = 'iné strany'
+
+possible_coalitions = [
+  ['PS', 'SaS', 'OĽaNO', 'SME Rodina', 'KDH', 'Demokrati'],
+  ['PS', 'SaS', 'OĽaNO', 'SME Rodina', 'KDH', 'Demokrati', 'HLAS-SD'],
+  ['PS', 'SaS', 'OĽaNO', 'KDH', 'Demokrati', 'HLAS-SD'],
+  ['PS', 'SaS', 'OĽaNO', 'SME Rodina', 'Demokrati', 'HLAS-SD'],
+  ['SMER-SD', 'HLAS-SD', 'SNS'],
+  ['SMER-SD', 'HLAS-SD', 'SNS', 'KDH'],
+  ['SMER-SD', 'HLAS-SD', 'SNS', 'Republika'],
+  ['SMER-SD', 'SNS', 'Republika'],
+] 
 
 include_limit = 0.03
 include_current3_limit = 0.02
@@ -149,6 +161,20 @@ for i in range(runs):
 
 estimates = estimates.fillna(0)
 
+# coallitions
+coalition_probabilities = []
+for pc in possible_coalitions:
+  item = {
+    'name': (' + ').join(pc),
+    'probability': round(sum(estimates.loc[:, pc].sum(axis=1) > 75) / runs * 100, 1)
+  }
+  coalition_probabilities.append(item)
+
+with open(data_path + "nrsr_coalitions.csv", "w") as fout:
+  writer = csv.DictWriter(fout, fieldnames=['name', 'probability'])
+  writer.writeheader()
+  writer.writerows(coalition_probabilities)
+  
 # seats - best estimate
 ms = m.reset_index().rename(columns={'index': 'party', mun.index.max(): 'value'})
 ms.loc[:, 'value'] = ms['value'] / sample_n
