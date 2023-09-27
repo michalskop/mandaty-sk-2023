@@ -1,9 +1,11 @@
 name,probability
-PS + SaS + OĽaNO + SME Rodina + KDH + Demokrati,16.3
-PS + SaS + OĽaNO + SME Rodina + KDH + Demokrati + HLAS-SD,97.2
-PS + SaS + OĽaNO + KDH + Demokrati + HLAS-SD,86.3
-PS + SaS + OĽaNO + SME Rodina + Demokrati + HLAS-SD,64.8
-SMER-SD + HLAS-SD + SNS,18.9
-SMER-SD + HLAS-SD + SNS + KDH,56.0
-SMER-SD + HLAS-SD + SNS + Republika,78.6
-SMER-SD + SNS + Republika,1.3
+PS + SaS + OĽaNO + SME Rodina + KDH + Demokrati,20.3
+PS + SaS + OĽaNO + SME Rodina + KDH + Demokrati + HLAS-SD,97.5
+PS + SaS + SME Rodina + KDH + Demokrati + HLAS-SD,80.1
+PS + SaS + KDH + HLAS-SD,50.4
+PS + SaS + OĽaNO + KDH + Demokrati + HLAS-SD,88.1
+PS + SaS + OĽaNO + SME Rodina + Demokrati + HLAS-SD,65.1
+SMER-SD + HLAS-SD + SNS,17.6
+SMER-SD + HLAS-SD + SNS + KDH,56.4
+SMER-SD + HLAS-SD + SNS + Republika,75.3
+SMER-SD + SNS + Republika,1.5

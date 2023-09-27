@@ -28,6 +28,8 @@ others = 'iné strany'
 possible_coalitions = [
   ['PS', 'SaS', 'OĽaNO', 'SME Rodina', 'KDH', 'Demokrati'],
   ['PS', 'SaS', 'OĽaNO', 'SME Rodina', 'KDH', 'Demokrati', 'HLAS-SD'],
+  ['PS', 'SaS', 'SME Rodina', 'KDH', 'Demokrati', 'HLAS-SD'],
+  ['PS', 'SaS',  'KDH', 'HLAS-SD'],
   ['PS', 'SaS', 'OĽaNO', 'KDH', 'Demokrati', 'HLAS-SD'],
   ['PS', 'SaS', 'OĽaNO', 'SME Rodina', 'Demokrati', 'HLAS-SD'],
   ['SMER-SD', 'HLAS-SD', 'SNS'],
