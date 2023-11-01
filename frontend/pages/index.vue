@@ -3,23 +3,14 @@
     
     <ChartLinks />
 
-    <h1 class="pt-4">Národná rada 2020-2023</h1>
+    <h1 class="pt-4">Prezident/ka 2024</h1>
+
+    <President2024CurrentOdds />
 
     <hr />
 
-    <NrsrPollsSeats />
+    <President2024OddsChart />
 
-    <hr />
-
-    <NrsrPollsChart />
-
-    <hr />
-
-    <NrsrPrimeMinisterOddsChart />
-
-    <hr />
-
-    <NrsrPollsPartiesTables />
 
   </div>
 </template>

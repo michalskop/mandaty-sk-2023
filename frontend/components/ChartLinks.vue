@@ -3,8 +3,8 @@
     <div class="row justify-content-center pt-2">
       <div class="col-md-4">
         <NuxtLink to="/">
-          <img src="~/assets/image/nrsr_thumbnail.svg" class="image" />
-          <span class="text-image">Národná rada 2020-2023</span>
+          <img src="~/assets/image/president_2024_thumbnail.svg" class="image" />
+          <span class="text-image">Prezident/ka 2024</span>
         </NuxtLink>
       </div>
     </div>
