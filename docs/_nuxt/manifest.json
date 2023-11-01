@@ -1,11 +1,11 @@
 {
   "node_modules/nuxt/dist/app/entry.mjs": {
-    "file": "entry-49b7e91f.mjs",
+    "file": "entry-3b056008.mjs",
     "src": "node_modules/nuxt/dist/app/entry.mjs",
     "isEntry": true,
     "isDynamicEntry": true,
     "dynamicImports": [
-      "_plotly-4b155c68.mjs",
+      "_plotly-0e3d80aa.mjs",
       "assets/data/nrsr/data.json",
       "pages/archiv.vue",
       "pages/index.vue",
@@ -13,17 +13,19 @@
       "layouts/custom.vue"
     ],
     "css": [
-      "entry.dbfacc2b.css"
+      "entry.b4abcb5b.css"
     ],
     "assets": [
-      "nrsr_thumbnail.c8b5fc7b.svg",
+      "president_2024_thumbnail.b616b77b.svg",
+      "president_2024_odds_history.56023af3.svg",
+      "president_2024_odds_history_small.8aed3e9f.svg",
       "nrsr_polls_history_small.c21e0480.svg",
       "nrsr_prime_minister_odds_history.ec226b6a.svg",
       "nrsr_prime_minister_odds_history_small.fbc97df2.svg"
     ]
   },
   "pages/archiv.vue": {
-    "file": "archiv-ea6ba962.mjs",
+    "file": "archiv-91ead7c4.mjs",
     "src": "pages/archiv.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -31,34 +33,34 @@
     ]
   },
   "pages/index.vue": {
-    "file": "index-0e51297e.mjs",
+    "file": "index-2da4d323.mjs",
     "src": "pages/index.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_nrsr_share_image-e8b289d1.mjs",
+      "_nrsr_share_image-70a96d26.mjs",
       "node_modules/nuxt/dist/app/entry.mjs"
     ]
   },
-  "_nrsr_share_image-e8b289d1.mjs": {
-    "file": "nrsr_share_image-e8b289d1.mjs",
+  "_nrsr_share_image-70a96d26.mjs": {
+    "file": "nrsr_share_image-70a96d26.mjs",
     "imports": [
+      "node_modules/nuxt/dist/app/entry.mjs"
+    ]
+  },
+  "pages/parlament-2023.vue": {
+    "file": "parlament-2023-6e92db85.mjs",
+    "src": "pages/parlament-2023.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "_nrsr_share_image-70a96d26.mjs",
       "node_modules/nuxt/dist/app/entry.mjs"
     ],
     "dynamicImports": [
       "node_modules/nuxt/dist/app/entry.mjs"
     ]
   },
-  "pages/parlament-2023.vue": {
-    "file": "parlament-2023-cc7a6c87.mjs",
-    "src": "pages/parlament-2023.vue",
-    "isDynamicEntry": true,
-    "imports": [
-      "_nrsr_share_image-e8b289d1.mjs",
-      "node_modules/nuxt/dist/app/entry.mjs"
-    ]
-  },
   "layouts/custom.vue": {
-    "file": "custom-bc5456e0.mjs",
+    "file": "custom-8b74bc8c.mjs",
     "src": "layouts/custom.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -68,8 +70,8 @@
       "custom.af0487a0.css"
     ]
   },
-  "_plotly-4b155c68.mjs": {
-    "file": "plotly-4b155c68.mjs",
+  "_plotly-0e3d80aa.mjs": {
+    "file": "plotly-0e3d80aa.mjs",
     "isDynamicEntry": true,
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs"
