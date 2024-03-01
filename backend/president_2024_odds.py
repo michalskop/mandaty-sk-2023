@@ -13,7 +13,7 @@ assets_path = "frontend/assets/"
 public_path = "frontend/public/shares/"
 flourish_path = "backend/data/"
 
-election_date = "2024-04-16"  # latest possible date
+election_date = "2024-04-06"  # latest possible date
 
 # limits to include in the output
 limit_current = 1
@@ -29,6 +29,9 @@ df_fortuna.columns = reversed_cols
 
 df_fortuna.rename(columns={"Gyimesi Győrgy": "Gyimesi "}, inplace=True)
 
+# remove columns Ano, Ne for Tipsport
+columns_to_drop = ['Ano', 'Ne']
+df_tipsport = df_tipsport.drop(columns=[col for col in columns_to_drop if col in df_tipsport.columns])
 
 # Calculate averages from Fortuna and Tipsport
 # average of 2 and 3 is 1 / ((1/2 + 1/3) / 2) = 2.4
