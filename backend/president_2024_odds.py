@@ -30,8 +30,13 @@ df_fortuna.columns = reversed_cols
 df_fortuna.rename(columns={"Gyimesi Győrgy": "Gyimesi "}, inplace=True)
 
 # remove columns Ano, Ne for Tipsport
+# other columns to drop all columns starting "Volební účast" and "Prezident bude zvolen"
 columns_to_drop = ['Ano', 'Ne']
+columns_to_drop += [col for col in df_tipsport.columns if col.startswith("Volební účast")]
+columns_to_drop += [col for col in df_tipsport.columns if col.startswith("Prezident bude zvolen")]
 df_tipsport = df_tipsport.drop(columns=[col for col in columns_to_drop if col in df_tipsport.columns])
+# rename columns, remove "Vítěz - : "
+df_tipsport.columns = [col.replace("Vítěz - : ", "") for col in df_tipsport.columns]
 
 # Calculate averages from Fortuna and Tipsport
 # average of 2 and 3 is 1 / ((1/2 + 1/3) / 2) = 2.4
@@ -68,6 +73,7 @@ out = current_data[current_data['perc'] >= limit_current]
 out = out.sort_values(by='perc', ascending=False)
 out = out.loc[:, ['name', 'perc']]
 out['perc_floor'] = out['perc'].apply(lambda x: int(np.floor(x)))
+out['perc_round'] = out['perc'].apply(lambda x: round(x))
 out['perc_tens'] = ((out['perc'] - out['perc_floor']) * 10).astype(int)
 tmp = out['name'].str.split(' ')
 out['family_name'] = tmp.apply(lambda x: x[0])

@@ -13,7 +13,7 @@
           <div class="card text-center mb-2">
             <h4 class="card-header card-title">{{ candidate.family_name }} <small>{{candidate.other_names}}</small></h4>
             <div class="card-body">
-              <div class="number fs-2">{{ candidate.perc_floor }}<small v-if="candidate.perc_floor < 5">.{{ candidate.perc_tens }}</small> %</div>
+              <div class="number fs-2">{{ candidate.perc_round }}<small v-if="candidate.perc_round < 5">.{{ candidate.perc_tens }}</small> %</div>
             </div>
           </div>
         </div>
