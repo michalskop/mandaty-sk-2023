@@ -60,6 +60,9 @@ for i in range(len(source.columns)):
 source1 = source  # source[source['tags'] == 'parties']
 middle_dates = source1['middle_date']
 
+# sort by middle_date
+source1 = source1.sort_values(by='middle_date')
+
 # parties, filter out coalitions
 allvaluesp = source1.iloc[:, (cn + 1):]
 allvaluesp = allvaluesp.dropna(axis=1, how='all')
@@ -127,6 +130,8 @@ sigman = np.sqrt(mu1 * (1 - mu1) * sample_n)
 # Hagenbach-Bischoff
 def hagenbach_bischoff(sample):
   """Hagenbach-Bischoff."""
+  # NOTE: may be incorect!!!
+  nmps = 150
   sample = sample.copy()
   sample = sample.merge(choices, left_on="party", right_on="id", how="left")
   sample.loc[:, 'value'] = sample.apply(lambda row: row['value'] if row['value'] >= row['needs'] else 0, axis=1)
@@ -135,7 +140,7 @@ def hagenbach_bischoff(sample):
   sample = sample.sort_values(['value'], ascending=[False])
   sample['cumulative'] = sample['value'].cumsum()
   sample['cumulative'] = sample['cumulative'] / sample['cumulative'].max()
-  sample['seats'] = sample['cumulative'].apply(lambda x: math.floor(x * 150))
+  sample['seats'] = sample['cumulative'].apply(lambda x: math.floor(x * nmps))
   sample['seats'] = sample['seats'].diff().fillna(sample['seats'])
   sample['seats'] = sample['seats'].astype('int')
   sample['seats'] = sample['seats'].clip(lower=0)
