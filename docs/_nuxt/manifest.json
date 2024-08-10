@@ -1,11 +1,11 @@
 {
   "node_modules/nuxt/dist/app/entry.mjs": {
-    "file": "entry-b300817c.mjs",
+    "file": "entry-73c16845.mjs",
     "src": "node_modules/nuxt/dist/app/entry.mjs",
     "isEntry": true,
     "isDynamicEntry": true,
     "dynamicImports": [
-      "_plotly-61090ad1.mjs",
+      "_plotly-220cc93e.mjs",
       "assets/data/nrsr/data.json",
       "pages/archiv.vue",
       "pages/index.vue",
@@ -16,16 +16,16 @@
       "entry.b4abcb5b.css"
     ],
     "assets": [
-      "president_2024_thumbnail.d0652974.svg",
-      "president_2024_odds_history.14f1a9ab.svg",
-      "president_2024_odds_history_small.617eeb7e.svg",
+      "president_2024_thumbnail.36af4cbb.svg",
+      "president_2024_odds_history.69918a53.svg",
+      "president_2024_odds_history_small.68e42f6f.svg",
       "nrsr_polls_history_small.c21e0480.svg",
       "nrsr_prime_minister_odds_history.ec226b6a.svg",
       "nrsr_prime_minister_odds_history_small.fbc97df2.svg"
     ]
   },
   "pages/archiv.vue": {
-    "file": "archiv-5cc2368a.mjs",
+    "file": "archiv-f61b4841.mjs",
     "src": "pages/archiv.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -33,26 +33,26 @@
     ]
   },
   "pages/index.vue": {
-    "file": "index-aca64579.mjs",
+    "file": "index-2469329d.mjs",
     "src": "pages/index.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_nrsr_share_image-d0b0aecd.mjs",
+      "_nrsr_share_image-98ef30f8.mjs",
       "node_modules/nuxt/dist/app/entry.mjs"
     ]
   },
-  "_nrsr_share_image-d0b0aecd.mjs": {
-    "file": "nrsr_share_image-d0b0aecd.mjs",
+  "_nrsr_share_image-98ef30f8.mjs": {
+    "file": "nrsr_share_image-98ef30f8.mjs",
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs"
     ]
   },
   "pages/parlament-2023.vue": {
-    "file": "parlament-2023-9f406cba.mjs",
+    "file": "parlament-2023-84beca18.mjs",
     "src": "pages/parlament-2023.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_nrsr_share_image-d0b0aecd.mjs",
+      "_nrsr_share_image-98ef30f8.mjs",
       "node_modules/nuxt/dist/app/entry.mjs"
     ],
     "dynamicImports": [
@@ -60,7 +60,7 @@
     ]
   },
   "layouts/custom.vue": {
-    "file": "custom-f50c2157.mjs",
+    "file": "custom-0a1edf67.mjs",
     "src": "layouts/custom.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -70,8 +70,8 @@
       "custom.af0487a0.css"
     ]
   },
-  "_plotly-61090ad1.mjs": {
-    "file": "plotly-61090ad1.mjs",
+  "_plotly-220cc93e.mjs": {
+    "file": "plotly-220cc93e.mjs",
     "isDynamicEntry": true,
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs"
